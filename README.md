@@ -1,6 +1,6 @@
 # Advent of Code 2024 in Typescript
 
-![AoC 2024 10/50](https://img.shields.io/badge/AoC%202024-10%2F50-orange)
+![AoC 2024 12/50](https://img.shields.io/badge/AoC%202024-12%2F50-orange)
 
 2024 fork of original code for AoC 2021 from atme: https://github.com/atme/advent-of-code-2021
 
