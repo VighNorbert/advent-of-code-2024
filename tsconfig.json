@@ -4,7 +4,8 @@
 		"module": "commonjs",
 		"target": "es2017",
 		"lib": ["ESNext"],
-		"baseUrl": "./src",
+		"baseUrl": "./",
+		"sourceRoot": "./",
 		"incremental": true,
 		"noEmitOnError": true
 	}

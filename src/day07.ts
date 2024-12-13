@@ -1,3 +1,5 @@
+import { sum } from './utils';
+
 const unconcat = (possibilities: number[], value: number) => {
 	return possibilities.map(
 		(x) => (x - value) / Math.pow(10, value.toString().length)
@@ -22,7 +24,7 @@ const calibrationsSumAdjustable = (s: string, concat = false) => {
 			});
 			return possibilities.includes(0) ? testValue : 0;
 		})
-		.reduce((acc, value) => acc + value, 0);
+		.reduce(sum);
 };
 
 export const calibrationsSum = (s: string) => {

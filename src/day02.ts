@@ -2,9 +2,7 @@ const parse = (s: string) => s.trim().split('\n');
 
 export const safeReports = (s: string) => {
 	return parse(s)
-		.map((line) => {
-			return isReportSafe(line.split(' ').map(Number));
-		})
+		.map((line) => isReportSafe(line.split(' ').map(Number)))
 		.reduce((acc, x) => acc + (x ? 1 : 0), 0);
 };
 exports.first = safeReports;

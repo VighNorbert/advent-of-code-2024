@@ -1,3 +1,5 @@
+import { sum } from './utils';
+
 const parse = (s: string) => s.trim().split(' ').map(Number);
 
 const solutions = new Map<number, Map<number, number>>();
@@ -24,7 +26,7 @@ function blink(n: number, blinks: number): number {
 export const blinkingSimulator = (s: string, blinks = 25) => {
 	return parse(s)
 		.map((n) => blink(n, blinks))
-		.reduce((a, b) => a + b, 0);
+		.reduce(sum);
 };
 exports.first = blinkingSimulator;
 

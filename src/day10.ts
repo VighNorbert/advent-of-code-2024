@@ -1,3 +1,5 @@
+import { sum } from './utils';
+
 const parse = (s: string) =>
 	s
 		.trim()
@@ -34,40 +36,39 @@ exports.first = trailheadScores;
 export const trailheadRatings = (s: string, part_two = true) => {
 	return parse(s)
 		.map((line, y, grid) =>
-			line
-				.map((cell, x) => {
-					if (cell !== 0) return 0;
-					let locations: Location[] = [{ x, y, alt: 1 }];
-					for (let i = 1; i < 10; i++) {
-						const newLocations: Location[] = [];
-						for (let j = 0; j < locations.length; j++) {
-							const { x, y, alt } = locations[j];
-							[
-								[x + 1, y],
-								[x - 1, y],
-								[x, y + 1],
-								[x, y - 1],
-							].forEach(([nx, ny]) => {
-								if (
-									isInBounds(nx, ny, grid) &&
-									grid[ny][nx] === i
-								) {
-									newLocations.push({ x: nx, y: ny, alt });
-								}
-							});
-						}
-						if (part_two) {
-							locations = removeDuplicatesSum(newLocations);
-						} else {
-							locations = removeDuplicates(newLocations);
-						}
+			line.map((cell, x) => {
+				if (cell !== 0) return 0;
+				let locations: Location[] = [{ x, y, alt: 1 }];
+				for (let i = 1; i < 10; i++) {
+					const newLocations: Location[] = [];
+					for (let j = 0; j < locations.length; j++) {
+						const { x, y, alt } = locations[j];
+						[
+							[x + 1, y],
+							[x - 1, y],
+							[x, y + 1],
+							[x, y - 1],
+						].forEach(([nx, ny]) => {
+							if (
+								isInBounds(nx, ny, grid) &&
+								grid[ny][nx] === i
+							) {
+								newLocations.push({ x: nx, y: ny, alt });
+							}
+						});
 					}
-					return part_two
-						? locations.reduce((a, b) => a + b.alt, 0)
-						: locations.length;
-				})
-				.reduce((a, b) => a + b, 0)
+					if (part_two) {
+						locations = removeDuplicatesSum(newLocations);
+					} else {
+						locations = removeDuplicates(newLocations);
+					}
+				}
+				return part_two
+					? locations.reduce((a, b) => a + b.alt, 0)
+					: locations.length;
+			})
 		)
-		.reduce((a, b) => a + b, 0);
+		.flat()
+		.reduce(sum);
 };
 exports.second = trailheadRatings;

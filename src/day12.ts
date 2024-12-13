@@ -1,10 +1,4 @@
-const min = (a: number, b: number) => Math.min(a, b);
-const max = (a: number, b: number) => Math.max(a, b);
-const sum = (a: number, b: number) => a + b;
-const diff = (a: number, b: number) => a - b;
-const minmax = (arr: number[]) => [arr.reduce(min), arr.reduce(max)];
-const range = ([start, end]: number[]) =>
-	[...Array(end - start + 1)].map((_, i) => i + start);
+import { diff, minmax, range, sum } from './utils';
 
 type Position = { x: number; y: number };
 

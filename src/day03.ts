@@ -1,3 +1,5 @@
+import { sum } from './utils';
+
 const parse = (s: string) => s.trim().split('mul(');
 
 export const mulSums = (s: string) => {
@@ -15,7 +17,7 @@ export const mulSums = (s: string) => {
 			}
 			return parseInt(nums[0]) * parseInt(nums[1]);
 		})
-		.reduce((a, b) => a + b, 0);
+		.reduce(sum);
 };
 exports.first = mulSums;
 
@@ -24,6 +26,6 @@ export const mulSumsDoDont = (s: string) => {
 		.split('do()')
 		.map((t) => t.split("don't()")[0])
 		.map(mulSums)
-		.reduce((a, b) => a + b, 0);
+		.reduce(sum);
 };
 exports.second = mulSumsDoDont;

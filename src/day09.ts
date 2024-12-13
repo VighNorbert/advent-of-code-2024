@@ -1,3 +1,5 @@
+import { sum } from './utils';
+
 type File = {
 	id: number;
 	empty: boolean;
@@ -117,6 +119,6 @@ export const filesystemChecksumBlocks = (s: string) => {
 			}
 			return res;
 		})
-		.reduce((a, b) => a + b, 0);
+		.reduce(sum);
 };
 exports.second = filesystemChecksumBlocks;

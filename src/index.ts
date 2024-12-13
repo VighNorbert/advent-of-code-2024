@@ -11,12 +11,52 @@ if (Number.isNaN(day) || day < 1 || day > 25) {
 	console.error('For example: node src/index.js 1');
 	process.exit(1);
 }
+
+const d = day.toString().padStart(2, '0');
+
 const type = process.argv[2].slice(-1) === '+' ? 'second' : 'first';
-const file = `./day${day.toString().padStart(2, '0')}.ts`;
-const callback = require(file)[type];
+const file = `./src/day${d}.ts`;
 
+if (!fs.existsSync(file)) {
+	fs.writeFileSync(
+		file,
+		`const parse = (s: string) => s.trim().split('\\n');
+
+export const function1 = (s: string) => {
+\treturn 0;
+};
+exports.first = function1;
+
+export const function2 = (s: string) => {
+\treturn 0;
+};
+exports.second = function2;
+`
+	);
+}
+
+const testFile = `./tests/day${d}.test.ts`;
+
+if (!fs.existsSync(testFile)) {
+	fs.writeFileSync(
+		testFile,
+		`import { function1, function2 } from '../src/day${d}';
+
+const input = \`\`;
+
+test('day ${d}-1', () => {
+\texpect(function1(input)).toBe(-1);
+});
+
+test('day ${d}-2', () => {
+\texpect(function2(input)).toBe(-1);
+});
+`
+	);
+}
+
+const callback = require(`./day${d}.ts`)[type];
 const headers = { cookie, ua };
-
 const inputFile = `${__dirname}/../input/day${day
 	.toString()
 	.padStart(2, '0')}.in`;
